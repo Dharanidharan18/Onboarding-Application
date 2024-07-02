@@ -2,7 +2,7 @@ package com.chainsys.onboardapplication.model;
 
 import java.util.Date;
 
-public class Task {
+public class EmployeeTask {
     private int id;
     private String task;
     private String status;

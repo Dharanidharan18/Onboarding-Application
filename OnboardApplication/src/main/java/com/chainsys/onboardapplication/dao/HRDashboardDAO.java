@@ -1,6 +1,6 @@
 package com.chainsys.onboardapplication.dao;
 
-import com.chainsys.onboardapplication.model.DocumentApproval;
+import com.chainsys.onboardapplication.model.EmployeeDocuments;
 import com.chainsys.onboardapplication.model.Employee;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +13,8 @@ public interface HRDashboardDAO {
     void approveDocuments(HttpServletRequest request);
     List<Employee> getEmployees();
     List<Employee> getManagers();
-    List<DocumentApproval> getPendingDocumentApprovals();
+    List<EmployeeDocuments> getPendingDocumentApprovals();
     int getTotalEmployees();
     void updateTotalEmployeesCount();
-    List<DocumentApproval> getApprovedDocuments();
+    List<EmployeeDocuments> getApprovedDocuments();
 }

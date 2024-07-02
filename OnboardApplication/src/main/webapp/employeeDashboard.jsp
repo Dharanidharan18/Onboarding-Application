@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.chainsys.onboardapplication.model.Task" %>
+<%@ page import="com.chainsys.onboardapplication.model.EmployeeTask" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +88,7 @@
 </head>
 <body>
 <%
-    String name = (String) request.getAttribute("username");
+String name = (String) request.getAttribute("username");
     Boolean isApproved = (Boolean) request.getAttribute("isApproved");
     
     Integer employeeId = (Integer) session.getAttribute("employee_id");
@@ -211,9 +211,9 @@
                     <th>Due Date</th>
                 </tr>
                 <%
-                    List<Task> tasks = (ArrayList<Task>) request.getAttribute("tasks");
-                    if (tasks != null) {
-                        for (Task task : tasks) {
+                List<EmployeeTask> tasks = (ArrayList<EmployeeTask>) request.getAttribute("tasks");
+                                    if (tasks != null) {
+                                        for (EmployeeTask task : tasks) {
                 %>
                 <tr>
                     <td><%= task.getId() %></td>

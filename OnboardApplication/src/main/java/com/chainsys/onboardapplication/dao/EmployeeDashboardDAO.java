@@ -1,10 +1,9 @@
 package com.chainsys.onboardapplication.dao;
-import com.chainsys.onboardapplication.model.Task;
 
+import com.chainsys.onboardapplication.model.EmployeeTask;
 import java.util.List;
 
-public class EmployeeDashboardDAO {
-
-	 List<Task> getTasksByUsername(String username);
-	    boolean isEmployeeApproved(String username);
+public interface EmployeeDashboardDAO {
+    List<EmployeeTask> getTasksByUsername(String username);
+    boolean isEmployeeApproved(String username);
 }

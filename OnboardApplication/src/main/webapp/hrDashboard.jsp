@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.Blob" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.util.*, java.sql.Blob, com.chainsys.onboardapplication.model.Employee, com.chainsys.onboardapplication.model.DocumentApproval"%>
+<%@ page import="java.util.*, java.sql.Blob,com.chainsys.onboardapplication.model.Employee,com.chainsys.onboardapplication.model.EmployeeDocuments"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,32 +174,32 @@
             </tr>
         </thead>
         <tbody>
-            <% 
-                // Get the list of approved documents from request attribute
-                List<DocumentApproval> approvedDocuments = (List<DocumentApproval>) request.getAttribute("approve");
-                if (approvedDocuments != null && !approvedDocuments.isEmpty()) {
-                    for (DocumentApproval document : approvedDocuments) {
+            <%
+            // Get the list of approved documents from request attribute
+                                                    List<EmployeeDocuments> approvedDocuments = (List<EmployeeDocuments>) request.getAttribute("approve");
+                                                    if (approvedDocuments != null && !approvedDocuments.isEmpty()) {
+                                                        for (EmployeeDocuments document : approvedDocuments) {
             %>
                         <tr>
-                            <td><%= document.getEmployeeId() %></td>
-                            <td><%= document.getEmployeeName() %></td>
-                            <td><%= document.getPhoneNum() %></td>
-                            <td><%= document.getAadharNum() %></td>
-                            <td><%= document.getPanNum() %></td>
-                            <td><%= displayBlobData(document.getAadharImg(),"image") %></td>
-                            <td><%= displayBlobData(document.getPanImg(),"image") %></td>
-                            <td><%= displayBlobData(document.getMarksheet(),"image") %></td>
-                            <td><%= displayBlobData(document.getResume(),"image") %></td>
+                            <td><%=document.getEmployeeId()%></td>
+                            <td><%=document.getEmployeeName()%></td>
+                            <td><%=document.getPhoneNum()%></td>
+                            <td><%=document.getAadharNum()%></td>
+                            <td><%=document.getPanNum()%></td>
+                            <td><%=displayBlobData(document.getAadharImg(),"image")%></td>
+                            <td><%=displayBlobData(document.getPanImg(),"image")%></td>
+                            <td><%=displayBlobData(document.getMarksheet(),"image")%></td>
+                            <td><%=displayBlobData(document.getResume(),"image")%></td>
                         </tr>
-            <% 
-                    }
-                } else {
+            <%
+            }
+                                                    } else {
             %>
                     <tr>
                         <td colspan="9">No approved documents found.</td>
                     </tr>
-            <% 
-                }
+            <%
+            }
             %>
         </tbody>
             </div>
@@ -230,39 +230,39 @@
                 </thead>
                 <tbody>
                     <%
-                        List<DocumentApproval> documentApprovals = (List<DocumentApproval>) request.getAttribute("pendingDocumentApprovals");
-                        if (documentApprovals != null) {
-                            for (DocumentApproval approval : documentApprovals) {
+                    List<EmployeeDocuments> documentApprovals = (List<EmployeeDocuments>) request.getAttribute("pendingDocumentApprovals");
+                                                                                    if (documentApprovals != null) {
+                                                                                        for (EmployeeDocuments approval : documentApprovals) {
                     %>
                     <tr>
-                        <td><%= approval.getEmployeeId() %></td>
-                        <td><%= approval.getEmployeeName() %></td>
-                        <td><%= approval.getPhoneNum() %></td>
-                        <td><%= approval.getAadharNum() %></td>
-                        <td><%= approval.getPanNum() %></td>
+                        <td><%=approval.getEmployeeId()%></td>
+                        <td><%=approval.getEmployeeName()%></td>
+                        <td><%=approval.getPhoneNum()%></td>
+                        <td><%=approval.getAadharNum()%></td>
+                        <td><%=approval.getPanNum()%></td>
                         <td>
-                            <img src="data:image/jpeg;base64,<%= convertBlobToBase64(approval.getAadharImg()) %>" alt="Aadhar Image" width="100" height="100"/>
+                            <img src="data:image/jpeg;base64,<%=convertBlobToBase64(approval.getAadharImg())%>" alt="Aadhar Image" width="100" height="100"/>
                         </td>
                         <td>
-                            <img src="data:image/jpeg;base64,<%= convertBlobToBase64(approval.getPanImg()) %>" alt="PAN Image" width="100" height="100"/>
+                            <img src="data:image/jpeg;base64,<%=convertBlobToBase64(approval.getPanImg())%>" alt="PAN Image" width="100" height="100"/>
                         </td>
                         <td>
-                            <img src="data:image/jpeg;base64,<%= convertBlobToBase64(approval.getMarksheet()) %>" alt="Marksheet" width="100" height="100"/>
+                            <img src="data:image/jpeg;base64,<%=convertBlobToBase64(approval.getMarksheet())%>" alt="Marksheet" width="100" height="100"/>
                         </td>
                         <td>
-                            <a href="data:application/pdf;base64,<%= convertBlobToBase64(approval.getResume()) %>" target="_blank">View Resume</a>
+                            <a href="data:application/pdf;base64,<%=convertBlobToBase64(approval.getResume())%>" target="_blank">View Resume</a>
                         </td>
                         <td>
                             <form action="HRDashboardServlet" method="post">
                                 <input type="hidden" name="action" value="approveDocuments">
-                                <input type="hidden" name="employeeId" value="<%= approval.getEmployeeId() %>">
+                                <input type="hidden" name="employeeId" value="<%=approval.getEmployeeId()%>">
                                 <input type="submit" value="Approve">
                             </form>
                         </td>
                     </tr>
                     <%
-                            }
-                        }
+                    }
+                                                                }
                     %>
                 </tbody>
             </table>
@@ -313,14 +313,14 @@
                     <select id="employeeId" name="employeeId" required>
                         <option value="">Select Employee</option>
                         <%
-                            List<Employee> employees = (List<Employee>) request.getAttribute("employees");
-                            if (employees != null) {
-                                for (Employee employee : employees) {
+                        List<Employee> employees = (List<Employee>) request.getAttribute("employees");
+                                                                            if (employees != null) {
+                                                                                for (Employee employee : employees) {
                         %>
-                        <option value="<%= employee.getId() %>"><%= employee.getName() %></option>
+                        <option value="<%=employee.getId()%>"><%=employee.getName()%></option>
                         <%
-                                }
-                            }
+                        }
+                                                                            }
                         %>
                     </select>
                     
@@ -328,14 +328,14 @@
                     <select id="managerId" name="managerId" required>
                         <option value="">Select Manager</option>
                         <%
-                            List<Employee> managers = (List<Employee>) request.getAttribute("managers");
-                            if (managers != null) {
-                                for (Employee manager : managers) {
+                        List<Employee> managers = (List<Employee>) request.getAttribute("managers");
+                                                                            if (managers != null) {
+                                                                                for (Employee manager : managers) {
                         %>
-                        <option value="<%= manager.getId() %>"><%= manager.getName() %></option>
+                        <option value="<%=manager.getId()%>"><%=manager.getName()%></option>
                         <%
-                                }
-                            }
+                        }
+                                                                            }
                         %>
                     </select>
                     
@@ -365,10 +365,10 @@
             </tr>
         </thead>
         <tbody>
-            <% 
-                 employees = (List<Employee>) request.getAttribute("employees");
-                if (employees != null && !employees.isEmpty()) {
-                    for (Employee employee : employees) {
+            <%
+            employees = (List<Employee>) request.getAttribute("employees");
+                                        if (employees != null && !employees.isEmpty()) {
+                                            for (Employee employee : employees) {
             %>
             <tr>
                 <td><%= employee.getId() %></td>
@@ -399,8 +399,7 @@
 </body>
 </html>
 
-<%!
-    private String convertBlobToBase64(Blob blob) {
+<%!private String convertBlobToBase64(Blob blob) {
         String base64Image = "";
         try {
             if (blob != null) {
@@ -411,10 +410,8 @@
             e.printStackTrace();
         }
         return base64Image;
-    }
-%>
-<%! 
-    private String displayBlobData(Blob blob, String type) {
+    }%>
+<%!private String displayBlobData(Blob blob, String type) {
         if (blob == null) {
             return "No " + type + " available";
         }
@@ -434,6 +431,5 @@
             e.printStackTrace();
             return "Error retrieving " + type;
         }
-    }
-%>
+    }%>
 

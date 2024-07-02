@@ -1,7 +1,7 @@
 package com.chainsys.onboardapplication.controller;
 
 import com.chainsys.onboardapplication.dao.HRDashboardDAO;
-import com.chainsys.onboardapplication.model.DocumentApproval;
+import com.chainsys.onboardapplication.model.EmployeeDocuments;
 import com.chainsys.onboardapplication.model.Employee;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,8 +41,8 @@ public class HRDashboardController {
 
         List<Employee> employees = hrDashboardDAO.getEmployees();
         List<Employee> managers = hrDashboardDAO.getManagers();
-        List<DocumentApproval> approve = hrDashboardDAO.getApprovedDocuments();
-        List<DocumentApproval> pendingDocumentApprovals = hrDashboardDAO.getPendingDocumentApprovals();
+        List<EmployeeDocuments> approve = hrDashboardDAO.getApprovedDocuments();
+        List<EmployeeDocuments> pendingDocumentApprovals = hrDashboardDAO.getPendingDocumentApprovals();
         int totalEmployees = hrDashboardDAO.getTotalEmployees();
 
         model.addAttribute("employees", employees);

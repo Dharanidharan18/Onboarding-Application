@@ -1,7 +1,7 @@
 package com.chainsys.onboardapplication.dao.impl;
 
 import com.chainsys.onboardapplication.dao.HRDashboardDAO;
-import com.chainsys.onboardapplication.model.DocumentApproval;
+import com.chainsys.onboardapplication.model.EmployeeDocuments;
 import com.chainsys.onboardapplication.model.Employee;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -72,7 +72,7 @@ public class HRDashboardDAOImpl implements HRDashboardDAO {
     }
 
     @Override
-    public List<DocumentApproval> getPendingDocumentApprovals() {
+    public List<EmployeeDocuments> getPendingDocumentApprovals() {
         String sql = "SELECT ed.employee_id, u.employee_name, ed.phone_num, ed.aadhar_num, ed.pan_num, ed.aadhar_img, ed.pan_img, ed.marksheet, ed.resume " +
                      "FROM employee_details ed " +
                      "JOIN users u ON ed.employee_id = u.employee_id " +
@@ -93,7 +93,7 @@ public class HRDashboardDAOImpl implements HRDashboardDAO {
     }
 
     @Override
-    public List<DocumentApproval> getApprovedDocuments() {
+    public List<EmployeeDocuments> getApprovedDocuments() {
         String sql = "SELECT ed.employee_id, u.employee_name, ed.phone_num, ed.aadhar_num, ed.pan_num, ed.aadhar_img, ed.pan_img, ed.marksheet, ed.resume " +
                      "FROM employee_details ed " +
                      "JOIN users u ON ed.employee_id = u.employee_id " +
@@ -101,7 +101,7 @@ public class HRDashboardDAOImpl implements HRDashboardDAO {
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToDocumentApproval(rs));
     }
 
-    private DocumentApproval mapToDocumentApproval(ResultSet rs) throws SQLException {
+    private EmployeeDocuments mapToDocumentApproval(ResultSet rs) throws SQLException {
         int employeeId = rs.getInt("employee_id");
         String employeeName = rs.getString("employee_name");
         String phoneNum = rs.getString("phone_num");
@@ -111,6 +111,6 @@ public class HRDashboardDAOImpl implements HRDashboardDAO {
         Blob panImg = rs.getBlob("pan_img");
         Blob marksheet = rs.getBlob("marksheet");
         Blob resume = rs.getBlob("resume");
-        return new DocumentApproval(employeeId, employeeName, phoneNum, aadharNum, panNum, aadharImg, panImg, marksheet, resume);
+        return new EmployeeDocuments(employeeId, employeeName, phoneNum, aadharNum, panNum, aadharImg, panImg, marksheet, resume);
     }
 }

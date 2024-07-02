@@ -215,17 +215,17 @@
                         <th>Employee Name</th>
                     </tr>
                     <%
-                        List<Employee> assignedEmployees = (List<Employee>) request.getAttribute("assignedEmployees");
-                        if (assignedEmployees != null) {
-                            for (Employee employee : assignedEmployees) {
+                    List<Employee> assignedEmployees = (List<Employee>) request.getAttribute("assignedEmployees");
+                                                                if (assignedEmployees != null) {
+                                                                    for (Employee employee : assignedEmployees) {
                     %>
                     <tr>
-                        <td><%= employee.getId() %></td>
-                        <td><%= employee.getName() %></td>
+                        <td><%=employee.getId()%></td>
+                        <td><%=employee.getName()%></td>
                     </tr>
                     <%
-                            }
-                        }
+                    }
+                                                                }
                     %>
                 </table>
             </div>
@@ -264,9 +264,9 @@
                         <th>Completion of Certification</th>
                     </tr>
                     <%
-                        List<Employee> employeesOnBench = (List<Employee>) request.getAttribute("employeesOnBench");
-                        if (employeesOnBench != null) {
-                            for (Employee employee : employeesOnBench) {
+                    List<Employee> employeesOnBench = (List<Employee>) request.getAttribute("employeesOnBench");
+                                                                if (employeesOnBench != null) {
+                                                                    for (Employee employee : employeesOnBench) {
                     %>
                     <tr>
                         <td><%= employee.getId() %></td>

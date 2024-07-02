@@ -2,7 +2,7 @@ package com.chainsys.onboardapplication.model;
 
 import java.sql.Blob;
 
-public class DocumentApproval {
+public class EmployeeDocuments {
     private int employeeId;
     private String employeeName;
     private String phoneNum;
@@ -14,7 +14,7 @@ public class DocumentApproval {
     private Blob resume;
 
     
-    public DocumentApproval(int employeeId, String employeeName, String phoneNum, String aadharNum, String panNum, Blob aadharImg, Blob panImg, Blob marksheet, Blob resume) {
+    public EmployeeDocuments(int employeeId, String employeeName, String phoneNum, String aadharNum, String panNum, Blob aadharImg, Blob panImg, Blob marksheet, Blob resume) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.phoneNum = phoneNum;
@@ -26,7 +26,7 @@ public class DocumentApproval {
         this.resume = resume;
     }
 
-    public DocumentApproval(int documentId, String documentName, int employeeId2) {
+    public EmployeeDocuments(int documentId, String documentName, int employeeId2) {
 		
 	}
 
