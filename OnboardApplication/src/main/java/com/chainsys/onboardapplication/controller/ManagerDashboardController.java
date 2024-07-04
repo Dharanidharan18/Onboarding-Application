@@ -13,23 +13,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/manager")
 public class ManagerDashboardController {
 
     @Autowired
     private ManagerDashboardDAO managerDashboardDAO;
 
-    @GetMapping("/dashboard")
+    @GetMapping("/managerdashboard")
     public String getDashboard(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
-
+        System.out.println(username);
         if (username == null || !"manager".equals(session.getAttribute("role"))) {
             return "redirect:/login";
         }
@@ -45,7 +42,7 @@ public class ManagerDashboardController {
                 model.addAttribute("employeesOnBench", employeesOnBench);
             }
 
-            return "managerDashboard";
+            return "managerDashboard.jsp";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "Error loading dashboard");
@@ -71,7 +68,7 @@ public class ManagerDashboardController {
             } else if ("evaluateEmployee".equals(action)) {
                 managerDashboardDAO.evaluateEmployee(request);
             }
-            return "redirect:/manager/dashboard";
+            return "redirect:/managerDashboard.jsp";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "Error processing request");

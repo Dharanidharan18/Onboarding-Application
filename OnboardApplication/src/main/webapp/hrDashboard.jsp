@@ -98,21 +98,17 @@
             </ul>
             
             <ul class="logout-mode">
-                <li><a href="LogoutServlet">
-                    <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
-                </a></li>
+                <li>
+                    <form action="${pageContext.request.contextPath}/logout" method="post">
+                        <button type="submit" class="logout-button">
+                            <i class="uil uil-signout"></i>
+                            <span class="link-name">Logout</span>
+                        </button>
+                    </form>
+                </li>
 
-                <!-- <li class="mode">
-                    <a href="#">
-                        <i class="uil uil-moon"></i>
-                    <span class="link-name">Dark Mode</span>
-                </a>
-                <div class="mode-toggle">
-                    <span class="switch"></span>
-                </div>
-            </li>
- -->            </ul>
+             
+            </ul>
         </div>
     </nav>
 
@@ -253,7 +249,7 @@
                             <a href="data:application/pdf;base64,<%=convertBlobToBase64(approval.getResume())%>" target="_blank">View Resume</a>
                         </td>
                         <td>
-                            <form action="HRDashboardServlet" method="post">
+                            <form action="hr" method="post">
                                 <input type="hidden" name="action" value="approveDocuments">
                                 <input type="hidden" name="employeeId" value="<%=approval.getEmployeeId()%>">
                                 <input type="submit" value="Approve">
@@ -278,7 +274,7 @@
                 <!-- Add content for new employee section here -->
                 <section class="section register-section">
                 <h3>Register New Employee</h3>
-                <form action="HRDashboardServlet" method="post">
+                <form action="/register" method="post">
                     <input type="hidden" name="action" value="registerEmployee">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="employee_name" required>
@@ -306,7 +302,8 @@
                 <!-- Add content for projects section here -->
                 <section class="section assign-section">
                 <h3>Assign Employee to Project and Manager</h3>
-                <form action="HRDashboardServlet" method="post">
+                
+                <form action="/assignProject" method="post">
                     <input type="hidden" name="action" value="assignProject">
                     
                     <label for="employeeId">Employee:</label>

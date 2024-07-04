@@ -11,18 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
 //import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/employee")
+
 public class EmployeeDashboardController {
 
     @Autowired
     private EmployeeDashboardDAO employeeDashboardDAO;
 
-    @GetMapping("/dashboard")
+    @GetMapping("/employeedashboard")
     public String showDashboard(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
 

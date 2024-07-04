@@ -14,7 +14,7 @@ public interface HRDashboardDAO {
     List<Employee> getEmployees();
     List<Employee> getManagers();
     List<EmployeeDocuments> getPendingDocumentApprovals();
-    int getTotalEmployees();
-    void updateTotalEmployeesCount();
+   // int getTotalEmployees();
+    //void updateTotalEmployeesCount();
     List<EmployeeDocuments> getApprovedDocuments();
 }

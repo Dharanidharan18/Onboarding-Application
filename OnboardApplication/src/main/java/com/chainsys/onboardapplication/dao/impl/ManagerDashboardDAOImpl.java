@@ -29,8 +29,12 @@ public class ManagerDashboardDAOImpl implements ManagerDashboardDAO {
     @Override
     public List<Employee> getAssignedEmployees(int managerId) throws SQLException {
         String sql = "SELECT u.employee_id, u.employee_name FROM users u JOIN project_assignments pa ON u.employee_id = pa.employee_id WHERE pa.manager_id = ?";
-        return jdbcTemplate.query(sql, new EmployeeRowMapper(), managerId);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Employee employee = new Employee(rs.getInt("employee_id"),rs.getString("employee_name"));
+            return employee;
+        }, managerId);
     }
+
 
     @Override
     public void assignTask(HttpServletRequest request) throws SQLException {

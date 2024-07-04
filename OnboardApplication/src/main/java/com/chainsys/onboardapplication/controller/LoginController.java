@@ -6,33 +6,33 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 
+
 //import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	
 	@GetMapping("/home")
     public String homePage() {
-        return "redirect:/Login.jsp";
+        return "Login.jsp";
     }
 	
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostMapping
+    @PostMapping("/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         HttpSession session) {
         String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
         try {
-            String role = jdbcTemplate.queryForObject(sql, new Object[]{username, password}, String.class);
+            @SuppressWarnings("deprecation")
+			String role = jdbcTemplate.queryForObject(sql, new Object[]{username, password}, String.class);
 
             if (role != null) {
                 session.setAttribute("username", username);
@@ -40,11 +40,11 @@ public class LoginController {
 
                 switch (role) {
                     case "manager":
-                        return "redirect:/manager/dashboard";
+                        return "redirect:/managerdashboard";
                     case "hr":
-                        return "redirect:/hr/dashboard";
+                        return "/hrdashboard";
                     case "employee":
-                        return "redirect:/employee/dashboard";
+                        return "redirect:/employeedashboard";
                     default:
                         return "redirect:/login?error=Invalid role";
                 }
@@ -57,8 +57,16 @@ public class LoginController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "Login.jsp";
+    }
+    
+    @PostMapping("/logout")
+    public String logoutPost(HttpSession session) {
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/login";
     }
 }

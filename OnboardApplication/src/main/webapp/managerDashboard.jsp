@@ -99,12 +99,16 @@
             </ul>
             
             <ul class="logout-mode">
-                <li><a href="LogoutServlet">
-                    <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
-                </a></li>
+               <li>
+                    <form action="${pageContext.request.contextPath}/logout" method="post">
+                        <button type="submit" class="logout-button">
+                            <i class="uil uil-signout"></i>
+                            <span class="link-name">Logout</span>
+                        </button>
+                    </form>
+                </li>
 
-                <li class="mode">
+                <!-- <li class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
                     <span class="link-name">Dark Mode</span>
@@ -112,7 +116,7 @@
                     <div class="mode-toggle">
                         <span class="switch"></span>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>
@@ -176,7 +180,7 @@
                     <i class="uil uil-chart"></i>
                     <span class="text">Assign Task to Employee</span>
                 </div>
-                <form action="ManagerDashboardServlet" method="post" onsubmit="return validateTaskForm()">
+                <form action="/dashboard" method="post" onsubmit="return validateTaskForm()">
                     <input type="hidden" name="action" value="assignTask">
                     <label for="employeeId">Employee ID:</label>
                     <input type="text" id="employeeId" name="employeeId" required><br>
@@ -194,7 +198,7 @@
                     <i class="uil uil-thumbs-up"></i>
                     <span class="text">Approve Tasks</span>
                 </div>
-                <form action="ManagerDashboardServlet" method="post">
+                <form action="dashboard" method="post">
                     <input type="hidden" name="action" value="approveTask">
                     <label for="taskId">Task ID:</label>
                     <input type="text" id="taskId" name="taskId" required><br>

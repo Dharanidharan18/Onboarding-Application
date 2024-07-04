@@ -12,12 +12,7 @@ public class Employee {
     private String certificationType;
     private String completionOfCertification;
 
-    public Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Employee(int id, String name, Date startDate, Date endDate, String certificationType, String completionOfCertification) {
+	public Employee(int id, String name, Date startDate, Date endDate, String certificationType, String completionOfCertification) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -25,7 +20,18 @@ public class Employee {
         this.certificationType = certificationType;
         this.completionOfCertification = completionOfCertification;
     }
+	public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
+    public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
     public int getId() {
         return id;
     }

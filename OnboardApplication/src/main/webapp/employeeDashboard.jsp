@@ -140,12 +140,16 @@ String name = (String) request.getAttribute("username");
             </ul>
             
             <ul class="logout-mode">
-                <li><a href="LogoutServlet">
-                    <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
-                </a></li>
+                <li>
+                    <form action="${pageContext.request.contextPath}/logout" method="post">
+                        <button type="submit" class="logout-button">
+                            <i class="uil uil-signout"></i>
+                            <span class="link-name">Logout</span>
+                        </button>
+                    </form>
+                </li>
 
-                <li class="mode">
+                <!-- <li class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
                     <span class="link-name">Dark Mode</span>
@@ -153,7 +157,7 @@ String name = (String) request.getAttribute("username");
                 <div class="mode-toggle">
                     <span class="switch"></span>
                 </div>
-            </li>
+            </li> -->
             </ul>
         </div>
     </nav>

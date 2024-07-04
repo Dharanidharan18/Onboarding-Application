@@ -79,18 +79,18 @@ public class HRDashboardDAOImpl implements HRDashboardDAO {
                      "WHERE ed.is_approved = FALSE";
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToDocumentApproval(rs));
     }
+//
+//    @Override
+//    public int getTotalEmployees() {
+//        String sql = "SELECT COUNT(*) AS total FROM users WHERE role = 'employee'";
+//        return jdbcTemplate.queryForObject(sql, Integer.class);
+//    }
 
-    @Override
-    public int getTotalEmployees() {
-        String sql = "SELECT COUNT(*) AS total FROM users WHERE role = 'employee'";
-        return jdbcTemplate.queryForObject(sql, Integer.class);
-    }
-
-    @Override
-    public void updateTotalEmployeesCount() {
-        String updateSql = "UPDATE employee_count SET total_employees = total_employees + 1";
-        jdbcTemplate.update(updateSql);
-    }
+//    @Override
+//    public void updateTotalEmployeesCount() {
+//        String updateSql = "UPDATE employee_count SET total_employees = total_employees + 1";
+//        jdbcTemplate.update(updateSql);
+//    }
 
     @Override
     public List<EmployeeDocuments> getApprovedDocuments() {

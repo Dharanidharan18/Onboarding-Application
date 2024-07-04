@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Logout</h1>
-    <form action="LogoutServlet" method="post">
+    <form action="${pageContext.request.contextPath}/logout" method="post">
         <input type="submit" value="Logout">
     </form>
 </body>

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/hr")
 public class HRDashboardController {
 
     @Autowired
@@ -30,7 +29,7 @@ public class HRDashboardController {
     @Autowired
     private ApplicationContext appContext;
 
-    @GetMapping("/dashboard")
+    @PostMapping("/hrdashboard")
     public String getDashboard(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         String role = (String) session.getAttribute("role");
@@ -43,15 +42,15 @@ public class HRDashboardController {
         List<Employee> managers = hrDashboardDAO.getManagers();
         List<EmployeeDocuments> approve = hrDashboardDAO.getApprovedDocuments();
         List<EmployeeDocuments> pendingDocumentApprovals = hrDashboardDAO.getPendingDocumentApprovals();
-        int totalEmployees = hrDashboardDAO.getTotalEmployees();
+//        int totalEmployees = hrDashboardDAO.getTotalEmployees();
 
         model.addAttribute("employees", employees);
         model.addAttribute("managers", managers);
         model.addAttribute("approve", approve);
         model.addAttribute("pendingDocumentApprovals", pendingDocumentApprovals);
-        model.addAttribute("totalEmployees", totalEmployees);
+//        model.addAttribute("totalEmployees", totalEmployees);
 
-        return "dashboard";
+        return "hrDashboard.jsp";
     }
 
     @PostMapping("/register")
@@ -64,9 +63,9 @@ public class HRDashboardController {
         }
 
         hrDashboardDAO.registerEmployee(request);
-        hrDashboardDAO.updateTotalEmployeesCount();
+//        hrDashboardDAO.updateTotalEmployeesCount();
         model.addAttribute("message", "Employee registered successfully.");
-        return "redirect:/hr/dashboard";
+        return "hrdashboard";
     }
 
     @PostMapping("/assignProject")
@@ -83,7 +82,7 @@ public class HRDashboardController {
         } else {
             model.addAttribute("error", "Employee is already assigned to a project.");
         }
-        return "redirect:/hr/dashboard";
+        return "hrdashboard";
     }
 
     @PostMapping("/approveDocuments")
@@ -96,6 +95,6 @@ public class HRDashboardController {
         }
 
         hrDashboardDAO.approveDocuments(request);
-        return "redirect:/hr/dashboard";
+        return "hrdashboard";
     }
 }

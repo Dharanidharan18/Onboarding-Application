@@ -24,4 +24,5 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
             return new Employee(id, name, startDate, endDate, certificationType, completionOfCertification);
         }
     }
+    
 }
